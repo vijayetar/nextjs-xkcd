@@ -1,19 +1,56 @@
+import Link from 'next/Link'
+import Header from ('../components/Header')
+import SimpleLayout from ('../components/SimpleLayout')
+
 export default function Home() {
   return (
-    <div className="hello">
-      <p>Hello World</p>
+    <SimpleLayout>
+      <h1>{props.comic.title}</h1>
+      <Footer comicStuff= />
       <style jsx>{`
-        .hello {
-          font: 15px Helvetica, Arial, sans-serif;
-          background: #eee;
-          padding: 100px;
-          text-align: center;
-          transition: 100ms ease-in background;
-        }
-        .hello:hover {
-          background: #ccc;
+        .App{
+          margin: 20px;
+          padding: 20px;
+          border: 1px solid #DDD;
         }
       `}</style>
-    </div>
+    </SimpleLayout>
+  )
+}
+
+export async function getServerSideProps(context) {
+  const response = await fetch("http://xkcd.com/info.0.json")
+  const data = await response.json();
+  return {
+    props: {
+      comic:data
+    }, // will be passed to the page component as props
+  }
+}
+
+
+
+function Footer(props){
+  const currentNum = props.comicNum;
+  const nums = [];
+  for (let n = currentNum; n>currentNum-10; n--){
+    nums.push(n)
+  }
+  return (
+    <footer>
+      <h2>Previous {nums.length}</h2>
+      <ul>
+        {nums.map(num => (
+            <Link href="/num/[id].js" as={`/num/${num}}` key={num}>
+              <a>#{num}</a>
+            </Link>
+        ))}
+      </ul>
+      <style jsx>
+        {`
+        a {margin-right: 5vh}
+        `}
+      </style>
+    </footer>
   )
 }
