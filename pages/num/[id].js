@@ -1,11 +1,10 @@
-import Header from '../../components/Header'
+import SimpleLayout from '../../components/SimpleLayout'
 export default function ComicDetail(props){
   return (
-    <>
-    <Header />
-    <h1>{props.comic.title}</h1>
-    <img src = {props.comic.img} alt={props.comic.alt}></img>
-    </>
+    <SimpleLayout>
+      <h1>{props.comic.title}</h1>
+      <img src = {props.comic.img} alt={props.comic.alt}></img>
+    </SimpleLayout>
 
   )
 }

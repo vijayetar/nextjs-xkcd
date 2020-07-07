@@ -1,19 +1,12 @@
 import Link from 'next/Link'
-import Header from ('../components/Header')
-import SimpleLayout from ('../components/SimpleLayout')
+import SimpleLayout from '../components/SimpleLayout'
 
-export default function Home() {
+export default function Home(props) {
   return (
     <SimpleLayout>
       <h1>{props.comic.title}</h1>
-      <Footer comicStuff= />
-      <style jsx>{`
-        .App{
-          margin: 20px;
-          padding: 20px;
-          border: 1px solid #DDD;
-        }
-      `}</style>
+      <img src = {props.comic.img} alt={props.comic.alt}/>
+      <Footer comicNum= {props.comic.num}/>
     </SimpleLayout>
   )
 }
@@ -28,8 +21,6 @@ export async function getServerSideProps(context) {
   }
 }
 
-
-
 function Footer(props){
   const currentNum = props.comicNum;
   const nums = [];
@@ -41,7 +32,7 @@ function Footer(props){
       <h2>Previous {nums.length}</h2>
       <ul>
         {nums.map(num => (
-            <Link href="/num/[id].js" as={`/num/${num}}` key={num}>
+            <Link href="/num/[id].js" as={`/num/${num}`} key={num}>
               <a>#{num}</a>
             </Link>
         ))}

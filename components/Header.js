@@ -1,14 +1,21 @@
 import Link from 'next/link'
 
-export default function Header(props){
-  return (
+export default () => (
     <ul>
-      <li>
         <Link href="/">
           <a>Home</a>
         </Link>
-      </li>
-      
+        <Link href="/about">
+          <a>About</a>
+        </Link>
+        <style jsx>{`
+          a {
+            margin-right: 5vh;
+            color: purple;
+            text-decoration: none;
+          }
+        `}
+        </style>
+
     </ul>
   )
-}
