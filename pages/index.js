@@ -1,4 +1,4 @@
-import Link from 'next/Link'
+import Link from 'next/link'
 import SimpleLayout from '../components/SimpleLayout'
 
 export default function Home(props) {
